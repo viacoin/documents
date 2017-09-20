@@ -73,7 +73,7 @@ Viacoin parameters where N=1024, R=1, P=1 and S= random 80 bytes producing a 256
 Viacoin \cite{auxpow}Merged mining aims to reuse the mining power of any other \cite{scrypt}Scrypt coin
 to add security to the Viacoin blockchain,
 allowing a miner to mine for more than one blockchain at the same time. For example, a miner
-could mine Viacoin and Litecoin or any other Scrypt coin together with Viacoin with little to no impact on hashrate on either one.
+could mine Viacoin and Litecoin or any other Scrypt coin together with Viacoin with little to no impact on the hashrate of either one.
 \newline \newline \noindent
 Every hash the miner contributes is for the total hashrate of both
 cryptocurrencies and results in a more secure blockchain.
@@ -87,7 +87,7 @@ Miners have an incentive to mine Viacoin
 even if the reward is low as they can mine any other scrypt
 coin with Viacoin for “free”. As Viacoin mining isn't driven by large block rewards,
 this allows Viacoin to have a lower rate of inflation
-compared to other cryptocurrencies that do not have support for merged mining.
+compared to other cryptocurrencies that do not support merged mining.
 \newpage
 
 \section{Dark Gravity Wave}\label{sec: Dark Gravity Wave}
@@ -140,34 +140,33 @@ instantaneously, allowing for extremely efficient, decentralized exchanges or a 
 \newpage
 
 \section{Schnorr signature}\label{sec: Schnorr signature}
-We will develop Schnorr signature aggregation. It has been proposed in Bitcoin
-too. It is the replacement of ECDSA for the more efficient algorithm. Until now it
-was not possible to implement it without a hardfork but now it is. That’s why
-Segwit was important. All sig data is moved to the witness.
+Schnorr signature aggregation is part of upcoming developments as well. This functionality has also been proposed in Bitcoin
+as the successor of ECDSA as it is a more efficient algorithm. Until shortly, in Viacoin and in many other cryptocoins, it
+was not possible to implement it without a hardfork. Now that Segwit is implemented, it is.
+All signature data is moved to the witness.
 Viacoin currently utilized Elliptic Curve Digital Signatures (ECDSA) as a zk proof of
 ownership in order to authorize the transfer from one output to another. In 2015
-Daniel J. Bernstein proposed Schnorr like signature on top of an Elliptic Curve.
+Daniel J. Bernstein proposed to use a Schnorr like signature on top of an Elliptic Curve.
 \newline \newline
 Some Advantages:
 \begin{itemize}
 \item Provably secure under standard assumptions
-\item immunity to malleability
-\item resistance to hash-function collisions
+\item Immunity to malleability
+\item Resistance to hash-function collisions
 \item Batch validation for a 2-3x speedup
 \item Native k-of-k Multisignatures \ldots
 \end{itemize}
 \noindent
-It supports batch validation, which means if you have a group of public key
-message signatures pairs rather than just a single one, you can verify if all of
-them or not all of them are valid at a higher speed than each of them individually
-which is exactly what we want since blocks are just big batches of signatures to
+It supports batch validation, which means that if you have a group of public key
+message signature pairs rather than just a single one, you can verify the authenticity of the group as a whole
+at a higher speed than each of them individually. This is exactly what we want since blocks are just big batches of signatures to
 validate.
 \linebreak \noindent
-Native k-of-k multi signatures, the idea of Schnorr you can take multiple keys
+Native k-of-k multi signatures, the idea of Schnorr is that you can take multiple keys
 together and have a single signature that proves that all of them are signed.
 A group cat create a signature valid for the sum of keys.
 U1, U2 and U3 are the users. There’s a 2 round interaction scheme where they all
-come up with a nonce k1, k2, k3 and they all compute a corresponding public
+come up with a n-once k1, k2, k3 and they all compute a corresponding public
 point R1, R2, R3. They communicate those to each other and add them up with
 an overall R value. This overall R value signs this nonce with their own key
 resulting in an S1, 2, S3 and then you combine all the S values into one final S. A
@@ -201,9 +200,9 @@ R
 \end{equation}
 \newline
 \noindent Even if there is not a k-of-k situation, any other policy of what combination of
-keys can be signed and all one need is a merkle tree plus the ability for Schnorr
-to add up and build a tree where every node leave of the tree is a combination of
-keys that can be signed, hash them together and the root is the address.
+keys can be signed. All one needs is a merkle tree plus the ability for Schnorr
+to add up and build a tree where every node leaf of the tree is a combination of
+keys that can be signed. These then need to be hashed together and the root is the address.
 OP\_CHECKSIG \& OP\_CHECKMULTISIG will be modified so that they can stack
 pubkeys, delinearize and associate validated inputs and produce a
 combined signature for the transaction resulting into a 20\% reduction in block
@@ -219,7 +218,7 @@ $O(n)$ signing time
 \end{forest}
 \newline
 It is possible to do aggregation over all signatures in a single transaction. The
-idea behind it is to enable system validators like Viacoin nodes to compute a
+idea behind it, is to enable system validators like Viacoin nodes to compute a
 single key for every input of all transactions.
 \newpage
 
@@ -227,7 +226,7 @@ single key for every input of all transactions.
 In order to make the system robust, the state on the disk has to be persistent
 with a block. With an unexpected shutdown of the wallet we can startup and
 rollback or roll forward inside of it and be able to get a consistent tip on the disk.
-Normally whenever the cache would fill up, we would force flush
+Normally whenever the cache would fill up, a flush would be forced.
 If it is present at startup it means we crashed during flush, and we rollback/roll
 forward blocks inside of it to get a consistent tip on disk before proceeding.
 
@@ -238,15 +237,15 @@ transaction can be encoded that x units of a new asset where issued and are
 credited to a Viacoin address. The term is derived from the idea of “coloring” a
 nominal amount of coins.
 By coloring a viacoin it turns into a token that can represent anything a user
-wants to trade like a company stocks or real world value. This looks a lot like
-Counterparty but there are some key differences. It uses the Viacoin blockchain
+wants to trade like company stocks or physical goods. This seems very similar to
+'Counterparty' but there are some key differences. It uses the Viacoin blockchain
 (e.g NXT).
 \newline \newline \noindent
 It does not issue an auxiliary coin (e.g Counterparty and Mastercoin).
-The medata gives it meaning to a \cite{coloredCoins}colored coin transaction which is usually stored
-in one of the OP\_RETURN opcode. The output containing the OP\_RETURN is called
+The medata gives meaning to a \cite{coloredCoins}colored coin transaction which is usually stored
+in one of the OP\_RETURN opcodes. The output containing the OP\_RETURN is called
 a marker output. This marketcout can have a zero or non-zero value. The marker
-outputs starts with the OP\_RETURN opcode and can be followed by any sequance
+outputs starts with the OP\_RETURN opcode and can be followed by any sequence
 of opcodes which must contain a PUSHDATA opcode containing a parsable open
 Asset market Payload.
 The asset quantity list field is used to determine the quantity of each output of
@@ -254,37 +253,37 @@ the asset and each integer is using LEB128 encoding. If this exceeds 9 bytes, th
 market output is deemed invalid. The maximum asset quantity for an output is
 $2^63 - 1 units$.
 The colored coins \cite{openAsset}Open Asset Protocol sits on top of the Viacoin protocol. It does
-not require any changes to the Viacoin protocol.
+not require any changes to the Viacoin protocol itself.
 
 \section{MAST (Merkelized Abstract Syntax Trees)} \label{MAST (Merkelized Abstract Syntax Trees)}
-\cite{MAST}Mast allowing Viacoin transaction validation scripts to be stored in partially-hash
+\cite{MAST}Mast allowing Viacoin transaction validation scripts to be stored in partially-hashed
 form and allow nodes to interact with Merkle Trees.
 “When spending, users may provide only the branches they are executing, and
 hashes that connect the branches to the fixed size Merkle root. This reduces the
-size of redemption stack from $O(n)$ to $O(\log{}n)$ (n as the number of branches).
+size of the redemption stack from $O(n)$ to $O(\log{}n)$ (n as the number of branches).
 This enables complicated redemption conditions that is currently not possible
 due to the script size and opcode limit, improves privacy by hiding unexecuted
 branches, and allows inclusion of non-consensus enforced data with very low or
 no additional cost.” \newline \newline \noindent
 It is important because MAST allows smart contracts to be created without
 clogging up the blockchain. Usually all smart contracts would be visible on the
-blockchain and take up space. MAST to only reveal the smart contracts that have
-been completed with saving space because nodes only read the top layer of the
+blockchain and take up space. With MAST it is possible to only reveal the smart contracts that have
+been completed, saving space because nodes only have to read the top layer of the
 Merkle Tree.
 \noindent
-This sounds familiar to Ethereum but there’s a difference. Ethereum access to a
-VM and VIA will also obtain access to a VM though RootStock (RSK). RSK aims to
-be what Ethereum is (or should have been) decentralized, Turing-complete smart
+This may seem familiar to Ethereum's smart contract system but there is a difference.Ethereum accesses a VM directly
+where VIA will obtain access to a VM though RootStock (RSK). 
+RSK aims to be what Ethereum should have been: a decentralized, Turing-complete smart
 contract platform.
 
 \section{Viacoin RSK smart contracts} \label{Viacoin RSK smart contracts}
-\cite{rootstock}Rootstock is a smart contract platform which has a two-way peg. The idea is the
+\cite{rootstock}Rootstock is a smart contract platform which has a two-way peg. The idea is to
 enable it to work with smart contracts. Rootstock runs a turing complete Virtual
-machine called Rootstock Virtual Machine and is also compatible with Ethereum
-virtual machine and allows solidity compiled smart contracts to run.
-It could work by merge mining with Viacoin which allows the RSK blockchain to
-have the same security level as Viacoin. It should allow around the 2000
-transactions per second on chain and 20000 transactions per second off-chain.
+machine called Rootstock Virtual Machine (which is also compatible with Ethereum
+virtual machine!) and allows solidity compiled smart contracts to run.
+It could work by merge mining with Viacoin, which allows the RSK blockchain to
+have the same security level as Viacoin. It should allow for approximately 2000
+transactions per second on-chain and 20000 transactions per second off-chain.
 
 \section{Anonymous transactions} \label{Anonymous transactions}
 \cite{styx}An Unlinkable Anonymous Atomic Payment Hub For Viacoin based on Tumblebit.\newline
