@@ -30,9 +30,9 @@
 \begin{abstract}\noindent
 \normalsize Viacoin is an open source crypto-currency created in 2014,
 derived from the \cite{bitcoin2008}Bitcoin protocol that supports embedded consensus with an
-extended OP\_RETURN of 120 byte support. Viacoin features Scrypt Merged mining,
-also called Auxiliary proof of work or AuxPoW, and has 25x faster transaction speed.
-Viacoin mining reward halving takes place every 6 months with a total supply of
+extended OP\_RETURN of 120 byte. Viacoin features Scrypt Merged mining,
+also called Auxiliary proof of work or AuxPoW, and 25x faster transactions than Bitcoin.
+Viacoin mining reward halving takes place every 6 months and has a total supply of
 23,000,000 coins. The inflation rate and mining reward is very low. As the block 
 reward of Viacoin is low, miners are given incentive through Merged mining (AuxPoW).
 Viacoin is currently mined by one of the biggest mining pools
@@ -52,8 +52,8 @@ Versionbits to allow for 29 simultaneous Soft Fork changes to be implemented at 
 \section{Scrypt}\label{sec: Scrypt}
 In cryptography, \cite{scrypt}Scrypt is a password based key derivation function created by Colin Percival. The algorithm was designed to make it costly to perform large-scale custom hardware attacks by requiring large amounts of memory. In 2012, the algorithm was published by the IETF as an internet draft intended to become an informational RFC, but a version of Scrypt is now used as a proof of work scheme by cryptocurrencies like Viacoin. 
 \newline \newline \noindent
-Scrypt is a memory hard key derivation function, it requires a reasonable large amount of Random Access Memory to be evaluated.
-This makes implementation in special purpose custom hardware (ASICs) require more VLSI area, which would make it unfeasible to build. The requirement of Scrypt algorithm is a large array of pseudo random bits to be held in memory and a key that is derived from this. The algorithm is based on TMTO (Time-Memory Tradeoff). ASIC advantage in Viacoin is reduced by a factor of 10 compared to Bitcoin. 
+Scrypt is a memory hard key derivation function, it requires a reasonably large amount of Random Access Memory to be evaluated.
+This makes implementation in special purpose custom hardware (ASICs) require more VLSI area, which would make it unprofitable to build for the purpose of mining Viacoins. The requirement of Scrypt algorithm is a large array of pseudo random bits to be held in memory and a key that is derived from this. The algorithm is based on TMTO (Time-Memory Tradeoff). ASIC advantage in Viacoin is reduced by a factor of 10 compared to Bitcoin. 
 \newline \newline \noindent
 Scrypt uses the following parameters to generate a derived key:
 \begin{itemize}
@@ -73,11 +73,11 @@ Viacoin parameters where N=1024, R=1, P=1 and S= random 80 bytes producing a 256
 Viacoin \cite{auxpow}Merged mining aims to reuse the mining power of any other \cite{scrypt}Scrypt coin
 to add security to the Viacoin blockchain,
 allowing a miner to mine for more than one blockchain at the same time. For example, a miner
-to may mine Viacoin and Litecoin or any other Scrypt coin together with Viacoin.
+could mine Viacoin and Litecoin or any other Scrypt coin together with Viacoin with little to no impact on hashrate on either one.
 \newline \newline \noindent
 Every hash the miner contributes is for the total hashrate of both
 cryptocurrencies and results in a more secure blockchain.
-An AuxPoW is a type of block similar to a standard Bitcoin block with two
+An AuxPoW block is a type of block similar to a standard Bitcoin block with two
 differences. The hash of the block header does not meet the difficulty level of the
 blockchain. Secondly, it has additional data elements that shows that the miner
 who created a block did mining on the parent blockchain and that works meet
@@ -87,57 +87,56 @@ Miners have an incentive to mine Viacoin
 even if the reward is low as they can mine any other scrypt
 coin with Viacoin for “free”. As Viacoin mining isn't driven by large block rewards,
 this allows Viacoin to have a lower rate of inflation
-compared to other cryptocurrencies that don’t have merged mining.
+compared to other cryptocurrencies that do not have support for merged mining.
 \newpage
 
 \section{Dark Gravity Wave}\label{sec: Dark Gravity Wave}
-\cite{darkGravityWave}Dark Gravity Wave (DGW) is an open sourcer difficulty algorithm. DGW was
+\cite{darkGravityWave}Dark Gravity Wave (DGW) is an open source difficulty algorithm. DGW was
 authored by Evan Duffield, the developer and creator of X11/Darkcoin/Dash.
-The algorithm designed to address flaws like the Time warp attack in Kimoto
+The algorithm was designed to address flaws like the Time warp attack in Kimoto
 Gravity Wave algorithm. 
 \newline \newline \noindent
 Dark Gravity Wave was first introduced in Dash
 (Darkcoin). DGW makes use of multiple exponential moving averages and simple
-moving averages to smoother the readjustment mechanism.
+moving averages to smoothen the readjustment mechanism.
 \newline Formula: \newline \newline
 $2222222/ (((Difficulty+2600)/9)^2)$ \newline \newline \noindent
-Dark Gravity Wave version 3 is the latest version and allows improved difficulty retargeting compared
+Dark Gravity Wave version 3 is the latest version and allows for improved difficulty retargeting compared
 to the well known Kimo Gravity Well algorithm.
 
 \section{Segwit}\label{sec: Segwit}
-Viacoin has \cite{segwit}Segwit (BIP 141) activated. It helps to shrink the size of a transaction and the UTXO growth.
+Viacoin has \cite{segwit}Segwit (BIP 141) activated. It helps to shrink the size of a transaction and cope with the UTXO growth.
 Segregated Witness means it separates the witness from the transaction. It also
-aims to increase the per-block transaction throughput 2x or 3x while
-simultaneously making blocks syncing faster for new nodes.
+aims to increase the per-block transaction throughput by a factor of 2 or 3, while
+simultaneously making block syncing faster for new nodes.
 \newline \newline \noindent
-Segwit main purpose is not a capacity increase, it’s fixing malleability and
-making scripting more easy to upgrade. With malleability fixed there are more
-things possible for Viacoin like \cite{atomic}atomic swaps, bidirectional payment channels and
+The main purpose of Segwit is not to increase capacity however, it i to fix malleability and
+make scripting easier to upgrade. Fixing malleability allows for other improvements in Viacoin like \cite{atomic}atomic swaps, bidirectional payment channels and
 Lightning networks that could increase Viacoin interoperability with Bitcoin.
 \newline \newline \noindent
-Segwit includes a version number for scripts so that additional opcodes that would have required
-a hard-fork to be used in non-segwit transactions instead. Easier changes to script opcodes will make advancing
-Viacoin easier. This makes Schnorr signatures, sidechains, MAST and other ideas possible.
+Segwit includes versioning for scripts so that additional opcodes (that would normally require
+a hard-fork in non-segwit transactions) can be used instead. Easier changes to script opcodes will make advancing
+Viacoin easier. This makes Schnorr signatures, sidechains, MAST and other features a possibility.
 
 \section{The Lightning Network}\label{sec: The Lightning Network}
 \cite{lightningNetwork}The Lightning Network is a transfer network operating at a layer above the
 Viacoin blockchain using smart contract functionality in the blockchain to enable instant payments across a network of participants. 
 Enabling improvements of several orders of magnitude in
 transaction throughput by moving the majority of transactions outside the
-consensus ledgers into Payment channels. Capable of millions to billions of transactions per second across the network.
+consensus ledgers into Payment channels. Allowing for millions to billions of transactions per second across the network.
 A capacity that blows away legacy payment rails.
-This is made possible by on-chain scripts which parties to enter into a bilateral stateful contracts where the state
-can be updated by sharing a digital signature and be closed finally by publishing
+This is made possible by supporting on-chain scripts in which parties enter into bilateral stateful contracts, in which the state
+can be updated by sharing a digital signature and can be closed by publishing
 evidence onto the blockchain.
 \newline \newline \noindent
-The Lightning Network allows for exceptionally low fees For a low-value transaction, the Lightning Network
-is a silver bullet. It allows for new kinds of commerce.
+The Lightning Network allows for exceptionally low fees. For a low-value transaction, the Lightning Network
+is the silver bullet. It allows for new kinds of commerce.
 By opening a payment channel with many parties, participants in the LN can
 become a focal point for routing the payment of others leading into a fully
-connected payment channel. The payment are enforced using a script which enforces the atomicity via decrementing time-locks.
+connected payment channel. The payments are enforced using a script which enforces the atomicity via decrementing time-locks.
 \newline \newline \noindent
-Another benefit is atomic cross-chain transactions, enabling users to trade viacoin, bitcoin, litecoin and other Segwit coins
-instantaneous making real efficient decentralized exchanges possible or a decentralized Shapeshift.
+Another benefit is the possibility of atomic cross-chain transactions, enabling users to trade viacoin, bitcoin, litecoin and other Segwit coins
+instantaneously, allowing for extremely efficient, decentralized exchanges or a decentralized form of 'Shapeshift.io'.
 \newpage
 
 \section{Schnorr signature}\label{sec: Schnorr signature}
