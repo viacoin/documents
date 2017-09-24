@@ -78,14 +78,14 @@ could mine Viacoin and Litecoin or any other Scrypt coin together with Viacoin w
 Every hash the miner contributes is for the total hashrate of both
 cryptocurrencies and results in a more secure blockchain.
 An AuxPoW block is a type of block similar to a standard Bitcoin block with two
-differences. The hash of the block header does not meet the difficulty level of the
+differences. Firstly, hash of the block header does not meet the difficulty level of the
 blockchain. Secondly, it has additional data elements that shows that the miner
 who created a block did mining on the parent blockchain and that works meet
 the difficulty level of the aux blockchain. 
 \newline \newline \noindent
 Miners have an incentive to mine Viacoin
 even if the reward is low as they are able to mine any other Scrypt
-coin simultaneously Viacoin for “free”. As Viacoin mining isn't driven by large block rewards,
+coin simultaneously with Viacoin for “free”. As Viacoin mining isn't driven by large block rewards,
 this allows Viacoin to have a lower rate of inflation
 compared to other cryptocurrencies that do not support merged mining.
 \newpage
@@ -144,7 +144,7 @@ Schnorr signature aggregation is part of upcoming developments as well. This fun
 as the successor of ECDSA as it is a more efficient algorithm. Until recently, in Viacoin and in many other cryptocoins, it
 was not possible to implement Schnorr signatures without a hardfork. Now with the malleability of Segwit, it is possible.
 All signature data is moved to the witness.
-Viacoin currently utilized Elliptic Curve Digital Signatures (ECDSA) as a zk proof of
+Viacoin currently utilizeS Elliptic Curve Digital Signatures (ECDSA) as a zk proof of
 ownership in order to authorize the transfer from one output to another. In 2015,
 Daniel J. Bernstein proposed to use a Schnorr like signature on top of an Elliptic Curve.
 \newline \newline
@@ -231,25 +231,25 @@ If it is present at startup it means we crashed during flush, and we rollback/ro
 forward blocks inside of it to get a consistent tip on disk before proceeding.
 
 \section{Colored coins}\label{Colored coins}
-Viacoin scripting language allows to store small amounts of metadata on the
+Viacoin scripting language allows small amounts of metadata to be stored on the
 blockchain which can represent asset manipulation instructions. A Viacoin
 transaction can be encoded that x units of a new asset were issued and are
 credited to a Viacoin address. The term is derived from the idea of “coloring” a
 nominal amount of coins.
 By coloring a Viacoin, it turns into a token that can represent anything a user
-wants to trade like company stocks or physical goods. This seems very similar to
+wants to trade like company stocks or physical goods. This may seem very similar to
 'Counterparty' but there are some key differences. It uses the Viacoin blockchain
 (e.g NXT).
 \newline \newline \noindent
 It does not issue an auxiliary coin (e.g Counterparty and Mastercoin).
-The medata gives meaning to a \cite{coloredCoins}colored coin transaction which is usually stored
+The meta data gives meaning to a \cite{coloredCoins}colored coin transaction which is usually stored
 in one of the OP\_RETURN opcodes. The output containing the OP\_RETURN is called
-a marker output. This marketcout can have a zero or non-zero value. The marker
+a marker output. This markerout can have a zero or non-zero value. The marker
 outputs starts with the OP\_RETURN opcode and can be followed by any sequence
 of opcodes which must contain a PUSHDATA opcode containing a parsable open
 Asset market Payload.
 The asset quantity list field is used to determine the quantity of each output of
-the asset and each integer is using LEB128 encoding. If this exceeds 9 bytes, the
+the asset, each integer uses LEB128 encoding. If this exceeds 9 bytes, the
 market output is deemed invalid. The maximum asset quantity for an output is
 $2^63 - 1 units$.
 The colored coins \cite{openAsset}Open Asset Protocol sits on top of the Viacoin protocol. It does
@@ -271,7 +271,7 @@ blockchain and take up space. With MAST it is possible to only reveal the smart 
 been completed, saving space as nodes only have to read the top layer of the
 Merkle Tree.
 \noindent
-This may seem familiar to Ethereum's smart contract system but there is a difference.Ethereum accesses a VM directly
+This may seem similar to Ethereum's smart contract system but there is a difference. Ethereum accesses a VM directly
 where VIA will obtain access to a VM though RootStock (RSK). 
 RSK aims to be what Ethereum should have been: a decentralized, Turing-complete smart
 contract platform.
