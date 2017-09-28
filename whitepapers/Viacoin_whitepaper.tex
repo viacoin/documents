@@ -78,7 +78,7 @@ could mine Viacoin and Litecoin or any other Scrypt coin together with Viacoin w
 Every hash the miner contributes is for the total hashrate of both
 cryptocurrencies and results in a more secure blockchain.
 An AuxPoW block is a type of block similar to a standard Bitcoin block with two
-differences. Firstly, hash of the block header does not meet the difficulty level of the
+differences. The hash of the block header does not meet the difficulty level of the
 blockchain. Secondly, it has additional data elements that shows that the miner
 who created a block did mining on the parent blockchain and that works meet
 the difficulty level of the aux blockchain. 
@@ -231,7 +231,7 @@ If it is present at startup it means we crashed during flush, and we rollback/ro
 forward blocks inside of it to get a consistent tip on disk before proceeding.
 
 \section{Colored coins}\label{Colored coins}
-Viacoin scripting language allows small amounts of metadata to be stored on the
+Viacoin scripting language allows to store small amounts of metadata on the
 blockchain which can represent asset manipulation instructions. A Viacoin
 transaction can be encoded that x units of a new asset were issued and are
 credited to a Viacoin address. The term is derived from the idea of “coloring” a
