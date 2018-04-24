@@ -22,5 +22,17 @@ A collection of viacoin related documents
 - [English](https://github.com/viacoin/documents/blob/master/whitepapers/styx/Viacoin-Styx-Whitepaper.pdf)
 - [Chinese](https://github.com/viacoin/documents/blob/master/whitepapers/styx/Viacoin-Styx-Whitepaper-Chinese.pdf)
 
+## Compile LaTeX whitepaper on Arch linux
+```$ yaourt -S texlive-core --noconfirm```
+
+````$ yaourt -S packer --noconfirm````
+
+````$ packer biber````
+
+````$ pdflatex Viacoin_whitepaper.tex````
+
+````$ biber Viacoin_whitepaper````
+
+````$ pdflatex Viacoin_whitepaper.tex ````
 
 
