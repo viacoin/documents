@@ -33,7 +33,7 @@ derived from the \cite{bitcoin2008}Bitcoin protocol that supports embedded conse
 extended OP\_RETURN of 120 byte. Viacoin features Scrypt Merged mining,
 also called Auxiliary proof of work or AuxPoW, and 25x faster transactions than Bitcoin.
 Viacoin mining reward halving takes place every 6 months and has a total supply of
-23,176,392.41459 coins. The inflation rate of Viacoin is low due to minimal mining reward. As the block 
+23,176,392.41459 coins. The inflation rate of Viacoin is low due to minimal mining reward. As the block
 reward of Viacoin is low, miners are given incentive to mine Viacoin through Merged mining (AuxPoW).
 Viacoin is currently mined by one of the biggest mining pools
 (F2Pool) with a very high hashrate.
@@ -50,10 +50,10 @@ Versionbits to allow for 29 simultaneous Soft Fork changes to be implemented at 
 \normalsize
 
 \section{Scrypt}\label{sec: Scrypt}
-In cryptography, \cite{scrypt}Scrypt is a password based key derivation function created by Colin Percival. The algorithm was designed to make it costly to perform large-scale custom hardware attacks by requiring large amounts of memory. In 2012, the algorithm was published by the IETF as an internet draft intended to become an informational RFC, but a version of Scrypt is now used as a proof of work scheme by cryptocurrencies like Viacoin. 
+In cryptography, \cite{scrypt}Scrypt is a password based key derivation function created by Colin Percival. The algorithm was designed to make it costly to perform large-scale custom hardware attacks by requiring large amounts of memory. In 2012, the algorithm was published by the IETF as an internet draft intended to become an informational RFC, but a version of Scrypt is now used as a proof of work scheme by cryptocurrencies like Viacoin.
 \newline \newline \noindent
 Scrypt is a memory hard key derivation function, it requires a reasonably large amount of Random Access Memory to be evaluated.
-This makes implementation in special purpose custom hardware (ASICs) require more VLSI area, which would make it unprofitable to build for the purpose of mining Viacoins. The requirement of Scrypt algorithm is a large array of pseudo random bits to be held in memory and a key that is derived from this. The algorithm is based on TMTO (Time-Memory Tradeoff). ASIC advantage in Viacoin is reduced by a factor of 10 compared to Bitcoin. 
+This makes implementation in special purpose custom hardware (ASICs) require more VLSI area, which would make it unprofitable to build for the purpose of mining Viacoins. The requirement of Scrypt algorithm is a large array of pseudo random bits to be held in memory and a key that is derived from this. The algorithm is based on TMTO (Time-Memory Tradeoff). ASIC advantage in Viacoin is reduced by a factor of 10 compared to Bitcoin.
 \newline \newline \noindent
 Scrypt uses the following parameters to generate a derived key:
 \begin{itemize}
@@ -81,7 +81,7 @@ An AuxPoW block is a type of block similar to a standard Bitcoin block with two
 differences. The hash of the block header does not meet the difficulty level of the
 blockchain. Secondly, it has additional data elements that shows that the miner
 who created a block did mining on the parent blockchain and that works meet
-the difficulty level of the aux blockchain. 
+the difficulty level of the aux blockchain.
 \newline \newline \noindent
 Miners have an incentive to mine Viacoin
 even if the reward is low as they are able to mine any other Scrypt
@@ -90,18 +90,37 @@ this allows Viacoin to have a lower rate of inflation
 compared to other cryptocurrencies that do not support merged mining.
 \newpage
 
-\section{Dark Gravity Wave}\label{sec: Dark Gravity Wave}
-\cite{darkGravityWave}Dark Gravity Wave (DGW) is an open source difficulty algorithm. DGW was
+\section{Anti Gravity Wave}\label{sec: Anti Gravity Wave}
+Anti Gravity Wave (AGW) is an open source difficulty algorithm. It comes from the Dark Gravity Wave (DGW) \cite{darkGravityWave} algorithm that had been
 authored by Evan Duffield, the developer and creator of X11/Darkcoin/Dash.
-The algorithm was designed to address flaws like the Time warp attack in Kimoto
-Gravity Wave algorithm. 
+The algorithm had been designed to address flaws like the Time warp attack in
+Kimoto Gravity Wave algorithm. Both DGW and AGW readjust block difficulty
+by using blockchain statistics on recently found blocks.
 \newline \newline \noindent
-Dark Gravity Wave was first introduced in Dash
-(Darkcoin). DGW makes use of multiple exponential moving averages and simple
-moving averages to smoothen the readjustment mechanism.
-\newline Formula: \newline \newline
-$2222222/ (((Difficulty+2600)/9)^2)$ \newline \newline \noindent
-Dark Gravity Wave version 3 is the latest version and allows for improved difficulty retargeting compared
+Anti Gravity Wave is a Via modification of the DGW. As a DGW, AGW makes use of simple and exponential moving averages of block actual timespans in the blockchain in order to smoothen the readjustment mechanism. In Anti Gravity Wave difficulty readjustes every block by the following rule:
+\newline \newline
+\begin{equation} \label{agw_1}
+    a_{i + 1} = \frac{ a_{i} + D_{LastBlock - i} }{ i + 1 }
+\end{equation}
+~\\
+Where $D_m$ is the difficulty of the block m. Given the following sequence (\ref{agw_1}), the 72nd term $a_{72}$ is found.
+\newline
+Then two timespans are determined, $T_{actual}$ and $T_{target}$. $T_{actual}$ is the actual time of the last 72 blocks had been calculated by the network, whereas $T_{target}$ is the nominal target value.
+\newline
+\begin{flalign*}
+  & T_{actual} = T_{LastBlock} - T_{LastBlock - 72} \\
+  & T_{target} = (72 - 1) * 24
+\end{flalign*}
+~\\
+Anti Gravity Wave algorithm can also readjust the target if it is too big or
+too small for the network. Final block difficulty is determined by as
+following:
+\newline \newline
+\begin{equation*}
+  Target = \frac{ a_{72} * T_{actual} }{ T_{target} }
+\end{equation*}
+~\\
+Anti Gravity Wave allows improved difficulty retargeting compared
 to the well known Kimo Gravity Well algorithm.
 
 \section{Segwit}\label{sec: Segwit}
@@ -120,7 +139,7 @@ Viacoin easier. This makes the addition of Schnorr signatures, sidechains, MAST 
 
 \section{The Lightning Network}\label{sec: The Lightning Network}
 \cite{lightningNetwork}The Lightning Network is a transfer network operating at a layer above the
-Viacoin blockchain using smart contract functionality in the blockchain to enable instant payments across a network of participants. 
+Viacoin blockchain using smart contract functionality in the blockchain to enable instant payments across a network of participants.
 This enables improvements of several orders of magnitude in
 transaction throughput by moving the majority of transactions outside the
 consensus ledgers into Payment channels. This allows millions to billions of transactions per second across the network.
@@ -136,7 +155,7 @@ become a focal point for routing the payment of others leading into a fully
 connected payment channel. The payments are enforced using a script which enforces the atomicity via decrementing time-locks.
 \newline \newline \noindent
 Another benefit is the possibility of atomic cross-chain transactions, enabling users to trade viacoin, bitcoin, litecoin and other Segwit coins
-instantaneously, allowing for extremely efficient, decentralized exchanges or a decentralized form of 'Shapeshift.io'.
+instantaneously, allowing for extremely efficient, decentralized exchanges or a decentralized form of 'Shapeshift.io'. Viacoin already supports atomic swaps, which had been tested \cite{viaatomic} with litecoin, decred and bitcoin blockchains.
 \newpage
 
 \section{Schnorr signature}\label{sec: Schnorr signature}
@@ -166,7 +185,7 @@ Native k-of-k multi signatures, the idea of Schnorr is that you can take multipl
 together and have a single signature that proves that all of them are signed.
 A group can create a signature valid for the sum of keys.
 U1, U2 and U3 are the users. There’s a 2 round interaction scheme where they all
-come up with a n-once k1, k2, k3 and they all compute a corresponding public
+come up with a nonce k1, k2, k3 and they all compute a corresponding public
 point R1, R2, R3. They communicate those to each other and add them up with
 an overall R value. This overall R value signs this nonce with their own key
 resulting in an S1, 2, S3 and then you combine all the S values into one final S. A
@@ -174,7 +193,7 @@ signature that will be valid for the sum of their keys. This has the advantage o
 the k-of-k multisig.
 \linebreak
 
-\begin{equation}
+\begin{equation*}
 \left.
     \begin{aligned}
         U_{1} &\rightarrow k_{1},\, R_{1} \\
@@ -197,7 +216,7 @@ R
 \right|
 \longrightarrow
 (R,\, s)
-\end{equation}
+\end{equation*}
 \newline
 \noindent Even if there is not a k-of-k situation, any other policy of what combination of
 keys can be signed. All one needs is a merkle tree plus the ability for Schnorr
@@ -242,21 +261,20 @@ wants to trade like company stocks or physical goods. This seems very similar to
 (e.g NXT).
 \newline \newline \noindent
 It does not issue an auxiliary coin (e.g Counterparty and Mastercoin).
-The medata gives meaning to a \cite{coloredCoins}colored coin transaction which is usually stored
+The metadata gives meaning to a \cite{coloredCoins}colored coin transaction which is usually stored
 in one of the OP\_RETURN opcodes. The output containing the OP\_RETURN is called
-a marker output. This marketcout can have a zero or non-zero value. The marker
-outputs starts with the OP\_RETURN opcode and can be followed by any sequence
+a marker output. This marker output can have a zero or non-zero value, and it starts with the OP\_RETURN opcode and can be followed by any sequence
 of opcodes which must contain a PUSHDATA opcode containing a parsable open
 Asset market Payload.
 The asset quantity list field is used to determine the quantity of each output of
 the asset and each integer is using LEB128 encoding. If this exceeds 9 bytes, the
 market output is deemed invalid. The maximum asset quantity for an output is
-$2^63 - 1 units$.
+$2^{63} - 1 $ units.
 The colored coins \cite{openAsset}Open Asset Protocol sits on top of the Viacoin protocol. It does
 not require any changes to the Viacoin protocol itself.
 
 \section{MAST (Merkelized Abstract Syntax Trees)} \label{MAST (Merkelized Abstract Syntax Trees)}
-\cite{MAST}Mast allows Viacoin transaction validation scripts to be stored in partially-hashed
+\cite{MAST}MAST allows Viacoin transaction validation scripts to be stored in partially-hashed
 form and allows nodes to interact with Merkle Trees.
 “When spending, users may provide only the branches they are executing, and
 hashes that connect the branches to the fixed size Merkle root. This reduces the
@@ -271,13 +289,12 @@ blockchain and take up space. With MAST it is possible to only reveal the smart 
 been completed, saving space as nodes only have to read the top layer of the
 Merkle Tree.
 \noindent
-This may seem familiar to Ethereum's smart contract system but there is a difference.Ethereum accesses a VM directly
-where VIA will obtain access to a VM though RootStock (RSK). 
+This may seem familiar to Ethereum's smart contract system but there is a difference.Ethereum accesses a VM directly whereas VIA will obtain access to a VM though RootStock (RSK).
 RSK aims to be what Ethereum should have been: a decentralized, Turing-complete smart
 contract platform.
 
 \section{Viacoin RSK smart contracts} \label{Viacoin RSK smart contracts}
-\cite{rootstock}Rootstock is a smart contract platform which has a two-way peg. The idea is to
+\cite{rootstock}RootStock is a smart contract platform which has a two-way peg. The idea is to
 enable it to work with smart contracts. Rootstock runs a turing complete Virtual
 machine called Rootstock Virtual Machine (which is also compatible with Ethereum
 virtual machine!) and allows solidity compiled smart contracts to run.
