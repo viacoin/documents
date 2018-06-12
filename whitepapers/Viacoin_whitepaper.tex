@@ -33,7 +33,7 @@ derived from the \cite{bitcoin2008}Bitcoin protocol that supports embedded conse
 extended OP\_RETURN of 120 byte. Viacoin features Scrypt Merged mining,
 also called Auxiliary proof of work or AuxPoW, and 25x faster transactions than Bitcoin.
 Viacoin mining reward halving takes place every 6 months and has a total supply of
-23,176,392.41459 coins. The inflation rate of Viacoin is low due to minimal mining reward. As the block 
+23,176,392.41459 coins. The inflation rate of Viacoin is low due to minimal mining reward. As the block
 reward of Viacoin is low, miners are given incentive to mine Viacoin through Merged mining (AuxPoW).
 Viacoin is currently mined by one of the biggest mining pools
 (F2Pool) with a very high hashrate.
@@ -50,10 +50,10 @@ Versionbits to allow for 29 simultaneous Soft Fork changes to be implemented at 
 \normalsize
 
 \section{Scrypt}\label{sec: Scrypt}
-In cryptography, \cite{scrypt}Scrypt is a password based key derivation function created by Colin Percival. The algorithm was designed to make it costly to perform large-scale custom hardware attacks by requiring large amounts of memory. In 2012, the algorithm was published by the IETF as an internet draft intended to become an informational RFC, but a version of Scrypt is now used as a proof of work scheme by cryptocurrencies like Viacoin. 
+In cryptography, \cite{scrypt}Scrypt is a password based key derivation function created by Colin Percival. The algorithm was designed to make it costly to perform large-scale custom hardware attacks by requiring large amounts of memory. In 2012, the algorithm was published by the IETF as an internet draft intended to become an informational RFC, but a version of Scrypt is now used as a proof of work scheme by cryptocurrencies like Viacoin.
 \newline \newline \noindent
 Scrypt is a memory hard key derivation function, it requires a reasonably large amount of Random Access Memory to be evaluated.
-This makes implementation in special purpose custom hardware (ASICs) require more VLSI area, which would make it unprofitable to build for the purpose of mining Viacoins. The requirement of Scrypt algorithm is a large array of pseudo random bits to be held in memory and a key that is derived from this. The algorithm is based on TMTO (Time-Memory Tradeoff). ASIC advantage in Viacoin is reduced by a factor of 10 compared to Bitcoin. 
+This makes implementation in special purpose custom hardware (ASICs) require more VLSI area, which would make it unprofitable to build for the purpose of mining Viacoins. The requirement of Scrypt algorithm is a large array of pseudo random bits to be held in memory and a key that is derived from this. The algorithm is based on TMTO (Time-Memory Tradeoff). ASIC advantage in Viacoin is reduced by a factor of 10 compared to Bitcoin.
 \newline \newline \noindent
 Scrypt uses the following parameters to generate a derived key:
 \begin{itemize}
@@ -81,7 +81,7 @@ An AuxPoW block is a type of block similar to a standard Bitcoin block with two
 differences. The hash of the block header does not meet the difficulty level of the
 blockchain. Secondly, it has additional data elements that shows that the miner
 who created a block did mining on the parent blockchain and that works meet
-the difficulty level of the aux blockchain. 
+the difficulty level of the aux blockchain.
 \newline \newline \noindent
 Miners have an incentive to mine Viacoin
 even if the reward is low as they are able to mine any other Scrypt
@@ -94,7 +94,7 @@ compared to other cryptocurrencies that do not support merged mining.
 \cite{darkGravityWave}Dark Gravity Wave (DGW) is an open source difficulty algorithm. DGW was
 authored by Evan Duffield, the developer and creator of X11/Darkcoin/Dash.
 The algorithm was designed to address flaws like the Time warp attack in Kimoto
-Gravity Wave algorithm. 
+Gravity Wave algorithm.
 \newline \newline \noindent
 Dark Gravity Wave was first introduced in Dash
 (Darkcoin). DGW makes use of multiple exponential moving averages and simple
@@ -120,7 +120,7 @@ Viacoin easier. This makes the addition of Schnorr signatures, sidechains, MAST 
 
 \section{The Lightning Network}\label{sec: The Lightning Network}
 \cite{lightningNetwork}The Lightning Network is a transfer network operating at a layer above the
-Viacoin blockchain using smart contract functionality in the blockchain to enable instant payments across a network of participants. 
+Viacoin blockchain using smart contract functionality in the blockchain to enable instant payments across a network of participants.
 This enables improvements of several orders of magnitude in
 transaction throughput by moving the majority of transactions outside the
 consensus ledgers into Payment channels. This allows millions to billions of transactions per second across the network.
@@ -272,7 +272,7 @@ been completed, saving space as nodes only have to read the top layer of the
 Merkle Tree.
 \noindent
 This may seem familiar to Ethereum's smart contract system but there is a difference.Ethereum accesses a VM directly
-where VIA will obtain access to a VM though RootStock (RSK). 
+where VIA will obtain access to a VM though RootStock (RSK).
 RSK aims to be what Ethereum should have been: a decentralized, Turing-complete smart
 contract platform.
 
